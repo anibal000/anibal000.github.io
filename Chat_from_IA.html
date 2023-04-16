@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat en Vivo</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			setInterval(function () {
+				$("#chat").load("get_chat.php");
+			}, 1000);
+			$("#submit").click(function() {
+				var usuario = $("#usuario").val();
+				var mensaje = $("#mensaje").val();
+				$.post("insert_chat.php", {usuario: usuario, mensaje: mensaje});
+				$("#mensaje").val("");
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="chat"></div>
+	<input type="text" id="usuario" placeholder="Nombre de Usuario"><br>
+	<input type="text" id="mensaje" placeholder="Escribe tu mensaje"><br>
+	<button id="submit">Enviar</button>
+</body>
+</html>
